@@ -16,7 +16,7 @@ return 구문 안에서는 {슬래시 + * 방식으로 주석
 */
 <ScrollView style={styles.container}>
 <Text style={styles.title}>나만의 꿀팁</Text>
-<Text style={styles.weather}>{'오늘의 날씨:'+ todayWeather +'°C' + todayCondition} </Text>
+<Text style={styles.weather}>오늘의 날씨: {todayWeather + '°C ' + todayCondition} </Text>
 <Image style={styles.mainImage} source={main}/>
 <ScrollView style={styles.middleContainer} horizontal indicatorStyle={"white"}>
 <TouchableOpacity style={styles.middleButton01}><Text style={styles.middleButtonText}>생활</Text></TouchableOpacity>
@@ -28,7 +28,14 @@ return 구문 안에서는 {슬래시 + * 방식으로 주석
 {/* 하나의 카드 영역을 나타내는 View */}
 { 
 tip.map((content,i)=>{
-return (<View style={styles.card} key={i}>
+return i % 2 == 0 ? (<View style={styles.cardEven} key={i}>
+<Image style={styles.cardImage} source={{uri:content.image}}/>
+<View style={styles.cardText}>
+<Text style={styles.cardTitle} numberOfLines={1}>{content.title}</Text>
+<Text style={styles.cardDesc} numberOfLines={3}>{content.desc}</Text>
+<Text style={styles.cardDate}>{content.date}</Text>
+</View>
+</View>) : (<View style={styles.cardOdd} key={i}>
 <Image style={styles.cardImage} source={{uri:content.image}}/>
 <View style={styles.cardText}>
 <Text style={styles.cardTitle} numberOfLines={1}>{content.title}</Text>
@@ -36,9 +43,12 @@ return (<View style={styles.card} key={i}>
 <Text style={styles.cardDate}>{content.date}</Text>
 </View>
 </View>)
+
 })
 }
+
 </View>
+
 </ScrollView>
 );
 }
@@ -154,6 +164,25 @@ fontSize:15
 cardDate: {
 fontSize:10,
 color:"#A6A6A6",
+},
+//카드 짝수 홀수에 따른 스타일 적용
+cardEven:{
+flex:1,
+flexDirection:"row",
+margin:10,
+backgroundColor:"#FFFED7",
+borderRadius:20,
+borderBottomWidth:0.5,
+borderBottomColor:"#eee",
+paddingBottom:10
+},
+cardOdd:{
+flex:1,
+flexDirection:"row",
+margin:10,
+borderBottomWidth:0.5,
+borderBottomColor:"#eee",
+paddingBottom:10
 },
 
 
