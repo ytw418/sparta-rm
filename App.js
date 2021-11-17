@@ -132,19 +132,8 @@ cardContainer: {
 marginTop:10,
 marginLeft:10
 },
-card:{
-flex:1,
-//컨텐츠들을 가로로 나열
-//세로로 나열은 column <- 디폴트 값임 
-flexDirection:"row",
-margin:10,
-borderBottomWidth:0.5,
-borderBottomColor:"#eee",
-paddingBottom:10
-
-},
 cardImage: {
-flex:1,
+
 width:100,
 height:100,
 borderRadius:10,
