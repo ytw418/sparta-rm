@@ -4,11 +4,11 @@ import AboutPage from './pages/AboutPage'
 
 function App() {
   return (
-    <div>
-      <Mainpage></Mainpage>
+  
+      
       <AboutPage></AboutPage>
 
-    </div>
+  
   )
 }
 
