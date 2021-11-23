@@ -4,9 +4,9 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'reac
 import data from '../data.json';
 import Card from '../components/Card';
 import Loading from '../components/Loading';
+import { StatusBar } from 'expo-status-bar';
 
-
-export default function MainPage() {
+export default function MainPage({navigation,route}) {
 console.disableYellowBox = true;
 //return 구문 밖에서는 슬래시 두개 방식으로 주석
 
@@ -25,6 +25,10 @@ useEffect(()=>{
 //뒤의 1000 숫자는 1초를 뜻함
 //1초 뒤에 실행되는 코드들이 담겨 있는 함수
 setTimeout(()=>{
+//헤더의 타이틀 변경
+navigation.setOptions({
+title:'나만의 꿀팁'
+})
 //꿀팁 데이터로 모두 초기화 준비
 let tip = data.tip;
 setState(tip)
@@ -57,7 +61,8 @@ return ready ? <Loading/> : (
 return 구문 안에서는 {슬래시 + * 방식으로 주석
 */
 <ScrollView style={styles.container}>
-<Text style={styles.title}>나만의 꿀팁</Text>
+<StatusBar style="black" />
+{/* <Text style={styles.title}>나만의 꿀팁</Text> */}
 <Text style={styles.weather}>오늘의 날씨: {todayWeather + '°C ' + todayCondition} </Text>
 <Image style={styles.mainImage} source={main}/>
 <ScrollView style={styles.middleContainer} horizontal indicatorStyle={"white"}>
@@ -71,12 +76,11 @@ return 구문 안에서는 {슬래시 + * 방식으로 주석
 {/* 하나의 카드 영역을 나타내는 View */}
 {
 cateState.map((content,i)=>{
-return (<Card content={content} key={i}/>)
+return (<Card content={content} key={i} navigation={navigation}/>)
 })
 }
 
 </View>
-
 </ScrollView>
 );
 }
