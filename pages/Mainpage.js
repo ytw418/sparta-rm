@@ -5,6 +5,7 @@ import data from '../data.json';
 import Card from '../components/Card';
 import Loading from '../components/Loading';
 import { StatusBar } from 'expo-status-bar';
+import * as Location from "expo-location";
 
 export default function MainPage({navigation,route}) {
 console.disableYellowBox = true;
@@ -33,11 +34,27 @@ title:'나만의 꿀팁'
 let tip = data.tip;
 setState(tip)
 setCateState(tip)
+getLocation()
 setReady(false)
 },1000)
 
 
 },[])
+
+const getLocation = async () => {
+//수많은 로직중에 에러가 발생하면
+//해당 에러를 포착하여 로직을 멈추고,에러를 해결하기 위한 catch 영역 로직이 실행
+try {
+//자바스크립트 함수의 실행순서를 고정하기 위해 쓰는 async,await
+await Location.requestForegroundPermissionsAsync();
+const locationData= await Location.getCurrentPositionAsync();
+console.log(locationData)
+
+} catch (error) {
+//혹시나 위치를 못가져올 경우를 대비해서, 안내를 준비합니다
+Alert.alert("위치를 찾을 수가 없습니다.", "앱을 껏다 켜볼까요?");
+}
+}
 
 const category = (cate) => {
 if(cate == "전체보기"){
@@ -64,13 +81,16 @@ return 구문 안에서는 {슬래시 + * 방식으로 주석
 <StatusBar style="black" />
 {/* <Text style={styles.title}>나만의 꿀팁</Text> */}
 <Text style={styles.weather}>오늘의 날씨: {todayWeather + '°C ' + todayCondition} </Text>
+<TouchableOpacity style={styles.aboutButton} onPress={()=>{navigation.navigate('AboutPage')}}>
+<Text style={styles.aboutButtonText}>소개 페이지</Text>
+</TouchableOpacity>
 <Image style={styles.mainImage} source={main}/>
 <ScrollView style={styles.middleContainer} horizontal indicatorStyle={"white"}>
 <TouchableOpacity style={styles.middleButtonAll} onPress={()=>{category('전체보기')}}><Text style={styles.middleButtonTextAll}>전체보기</Text></TouchableOpacity>
 <TouchableOpacity style={styles.middleButton01} onPress={()=>{category('생활')}}><Text style={styles.middleButtonText}>생활</Text></TouchableOpacity>
 <TouchableOpacity style={styles.middleButton02} onPress={()=>{category('재테크')}}><Text style={styles.middleButtonText}>재테크</Text></TouchableOpacity>
 <TouchableOpacity style={styles.middleButton03} onPress={()=>{category('반려견')}}><Text style={styles.middleButtonText}>반려견</Text></TouchableOpacity>
-<TouchableOpacity style={styles.middleButton04} onPress={()=>{category('꿀팁 찜')}}><Text style={styles.middleButtonText}>꿀팁 찜</Text></TouchableOpacity>
+<TouchableOpacity style={styles.middleButton04} onPress={()=>{navigation.navigate('LikePage')}}><Text style={styles.middleButtonText}>꿀팁 찜</Text></TouchableOpacity>
 </ScrollView>
 <View style={styles.cardContainer}>
 {/* 하나의 카드 영역을 나타내는 View */}
@@ -179,6 +199,20 @@ cardContainer: {
 marginTop:10,
 marginLeft:10
 },
+aboutButton: {
+backgroundColor:"pink",
+width:100,
+height:40,
+borderRadius:10,
+alignSelf:"flex-end",
+marginRight:20,
+marginTop:10
+},
+aboutButtonText: {
+color:"#fff",
+textAlign:"center",
+marginTop:10
+}
 
 
 });
