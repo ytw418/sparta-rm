@@ -12,7 +12,7 @@ export default function MainPage({navigation,route}) {
 console.disableYellowBox = true;
 //return 구문 밖에서는 슬래시 두개 방식으로 주석
 
-//기존 꿀팁을 저장하고 있을 상태
+//기존 꿀팁을 저장하고 있을 상태4
 const [state,setState] = useState([])
 //카테고리에 따라 다른 꿀팁을 그때그때 저장관리할 상태
 const [cateState,setCateState] = useState([])
@@ -57,7 +57,7 @@ await Location.requestPermissionsAsync();
 const locationData= await Location.getCurrentPositionAsync();
 const latitude = locationData['coords']['latitude']
 const longitude = locationData['coords']['longitude']
-const API_KEY = "cfc258c75e1da2149c33daffd07a911d";
+const API_KEY = "27e37a4973efcdb03227e9bab6213643";
 const result = await axios.get(
 `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
 );
@@ -67,6 +67,7 @@ const condition = result.data.weather[0].main
 
 console.log(temp)
 console.log(condition)
+console.log(result)
 
 //오랜만에 복습해보는 객체 리터럴 방식으로 딕셔너리 구성하기!!
 //잘 기억이 안난다면 1주차 강의 6-5를 다시 복습해보세요!
@@ -106,7 +107,7 @@ return 구문 안에서는 {슬래시 + * 방식으로 주석
 <ScrollView style={styles.container}>
 <StatusBar style="black" />
 {/* <Text style={styles.title}>나만의 꿀팁</Text> */}
-<Text style={styles.weather}>오늘의 날씨: {weather.temp + '°C ' + weather.condition} </Text>
+<Text style={styles.weather}>오늘의 날씨: {weather.temp} °C  {weather.condition} </Text>
 <TouchableOpacity style={styles.aboutButton} onPress={()=>{navigation.navigate('AboutPage')}}>
 <Text style={styles.aboutButtonText}>소개 페이지</Text>
 </TouchableOpacity>
