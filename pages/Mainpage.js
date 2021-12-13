@@ -96,7 +96,7 @@ return d.category == cate
 
 //실제 데이터를 넣을 예정이므로 주석!
 // let todayWeather = 10 + 17;
-// let todayCondition = "흐림"
+// let todayCondition = "흐림
 
 //처음 ready 상태값은 true 이므로 ? 물음표 바로 뒤에 값이 반환(그려짐)됨
 //useEffect로 인해 데이터가 준비되고, ready 값이 변경되면 : 콜론 뒤의 값이 반환(그려짐)
