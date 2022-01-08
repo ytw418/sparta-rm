@@ -14,7 +14,7 @@ console.disableYellowBox = true;
 
 //기존 꿀팁을 저장하고 있을 상태4
 const [state,setState] = useState([])
-//카테고리에 따라 다른 꿀팁을 그때그때 저장관리할 상태
+//카테고리에 따라 다른 꿀팁을 그때그때 저장관리할 상태관리
 const [cateState,setCateState] = useState([])
 
 //날씨 데이터 상태관리 상태 생성!
