@@ -13,6 +13,7 @@ import "firebase/storage";
 const firebaseConfig = {
    apiKey: "AIzaSyBc31NZyY-y74RyCuWHfWp3ta3CnvlDnww",
    authDomain: "sparta-myhoneytip-jun-93d16.firebaseapp.com",
+   databaseURL:"https://sparta-myhoneytip-jun-93d16-default-rtdb.asia-southeast1.firebasedatabase.app/",
    projectId: "sparta-myhoneytip-jun-93d16",
    storageBucket: "sparta-myhoneytip-jun-93d16.appspot.com",
    messagingSenderId: "273329978126",
