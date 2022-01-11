@@ -1,15 +1,18 @@
-//import * as firebase from 'firebase/app';
-import firebase from 'firebase/app';
+
+import firebase from "firebase/compat/app";
 
 // 사용할 파이어베이스 서비스 주석을 해제합니다
-//import "firebase/auth";
-import "firebase/database";
-//import "firebase/firestore";
-//import "firebase/functions";
-import "firebase/storage";
+//import "firebase/compat/auth";
+import "firebase/compat/database";
+//import "firebase/compat/firestore";
+//import "firebase/compat/functions";
+import "firebase/compat/storage";
+
+
+
 
 // Initialize Firebase
-//파이어베이스 사이트에서 봤던 연결정보를 여기에 가져옵니다
+//파이어베이스 사이트에서 봤던 연결정보를 여기에 가져옵니다.
 const firebaseConfig = {
    apiKey: "AIzaSyBc31NZyY-y74RyCuWHfWp3ta3CnvlDnww",
    authDomain: "sparta-myhoneytip-jun-93d16.firebaseapp.com",
