@@ -19,7 +19,7 @@ export default function DetailPage({ navigation, route }) {
    useEffect(() => {
       console.log(route)
       navigation.setOptions({
-         title: route.params.title,
+         title: route.params.name,
          headerStyle: {
             backgroundColor: '#000',
             shadowColor: "#000",
