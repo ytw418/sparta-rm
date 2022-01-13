@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import {StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Linking} from 'react-native';
 
-function AboutPage({navigation,route}) {
+export default function AboutPage({navigation,route}) {
 
    useEffect(() => {
       navigation.setOptions({
@@ -32,7 +32,7 @@ function AboutPage({navigation,route}) {
    )
 }
 
-export default AboutPage
+
 
 const styles = StyleSheet.create({
    container:{

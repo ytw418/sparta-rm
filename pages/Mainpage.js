@@ -31,7 +31,12 @@ export default function MainPage({navigation,route}) {
 
   useEffect(()=>{
     navigation.setOptions({
-      title:'나만의 꿀팁'
+      title:'나만의 꿀팁',
+      headerStyle:{
+        backgroundColor:"#000",
+        shadowColor:"#1f266a",
+     },
+     headerTintColor:"#fff",
     })  
 		//뒤의 1000 숫자는 1초를 뜻함
     //1초 뒤에 실행되는 코드들이 담겨 있는 함수
