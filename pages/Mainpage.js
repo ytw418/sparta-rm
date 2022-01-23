@@ -1,3 +1,4 @@
+
 import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
 
@@ -9,6 +10,13 @@ import { StatusBar } from 'expo-status-bar';
 import * as Location from "expo-location";
 import axios from "axios"
 import {firebase_db} from "../firebaseConfig"
+import {
+  setTestDeviceIDAsync,
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded
+} from 'expo-ads-admob';
 
 export default function MainPage({navigation,route}) {
   //useState 사용법
@@ -31,18 +39,13 @@ export default function MainPage({navigation,route}) {
 
   useEffect(()=>{
     navigation.setOptions({
-      title:'나만의 꿀팁',
-      headerStyle:{
-        backgroundColor:"#000",
-        shadowColor:"#1f266a",
-     },
-     headerTintColor:"#fff",
+      title:'나만의 꿀팁'
     })  
 		//뒤의 1000 숫자는 1초를 뜻함
     //1초 뒤에 실행되는 코드들이 담겨 있는 함수
     setTimeout(()=>{
         firebase_db.ref('/tip').once('value').then((snapshot) => {
-          console.log("파이어베이스에서 데이터 가져왔습니다!!")
+          console.log("메인페이지 파이어베이스 조회 성공")
           let tip = snapshot.val();
           
           setState(tip)
@@ -55,8 +58,6 @@ export default function MainPage({navigation,route}) {
         // setCateState(data.tip)
         // setReady(false)
     },1000)
- 
-    
   },[])
 
   const getLocation = async () => {
@@ -66,22 +67,17 @@ export default function MainPage({navigation,route}) {
       //자바스크립트 함수의 실행순서를 고정하기 위해 쓰는 async,await
       await Location.requestForegroundPermissionsAsync();
       const locationData= await Location.getCurrentPositionAsync();
-      console.log(locationData)
-      console.log(locationData['coords']['latitude'])
-      console.log(locationData['coords']['longitude'])
       const latitude = locationData['coords']['latitude']
       const longitude = locationData['coords']['longitude']
       const API_KEY = "cfc258c75e1da2149c33daffd07a911d";
       const result = await axios.get(
         `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
       );
-
-      console.log(result)
+    
       const temp = result.data.main.temp; 
       const condition = result.data.weather[0].main
-      
-      console.log(temp)
-      console.log(condition)
+      console.log("온도",temp)
+      console.log("날씨",condition)
 
       //오랜만에 복습해보는 객체 리터럴 방식으로 딕셔너리 구성하기!!
       //잘 기억이 안난다면 1주차 강의 6-5를 다시 복습해보세요!
@@ -120,7 +116,7 @@ export default function MainPage({navigation,route}) {
       <StatusBar style="light" />
       {/* <Text style={styles.title}>나만의 꿀팁</Text> */}
       <Text style={styles.weather}>오늘의 날씨: {weather.temp + '°C   ' + weather.condition} </Text>
-       <TouchableOpacity style={styles.aboutButton} onPress={()=>{navigation.navigate('AboutPage')}}>
+      <TouchableOpacity style={styles.aboutButton} onPress={()=>{navigation.navigate('AboutPage')}}>
           <Text style={styles.aboutButtonText}>소개 페이지</Text>
         </TouchableOpacity>
       <Image style={styles.mainImage} source={{uri:main}}/>
@@ -133,14 +129,32 @@ export default function MainPage({navigation,route}) {
       </ScrollView>
       <View style={styles.cardContainer}>
          {/* 하나의 카드 영역을 나타내는 View */}
-         {
+        {
           cateState.map((content,i)=>{
             return (<Card content={content} key={i} navigation={navigation}/>)
           })
         }
         
       </View>
-   
+      {/* 
+        ca-app-pub-8957945516038764~8200693147
+        ca-app-pub-5579008343368676/6885179499
+      */}
+      {Platform.OS === 'ios' ? (
+                <AdMobBanner
+                  bannerSize="fullBanner"
+                  servePersonalizedAds={true}
+                  adUnitID="ca-app-pub-8957945516038764/9972939815"
+                  style={styles.banner}
+                />
+            ) : (
+                <AdMobBanner
+                  bannerSize="fullBanner"
+                  servePersonalizedAds={true}
+                  adUnitID="ca-app-pub-8957945516038764/9972939815"
+                  style={styles.banner}
+                />
+            )}
     </ScrollView>)
 }
 
@@ -251,7 +265,10 @@ weather:{
     color:"#fff",
     textAlign:"center",
     marginTop:10
+  },
+  banner:{
+    width:"100%",
+    height:100
   }
-
 
 });
