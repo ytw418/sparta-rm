@@ -51,7 +51,7 @@ export default function LikePage({ navigation, route }) {
          {
             tip.map((content,i)=>{
                return(
-                  <LikeCard key={i} content={content} navigation={navigation}></LikeCard>
+                  <LikeCard key={i} content={content} navigation={navigation} tip={tip} setTip={setTip}></LikeCard>
                )
             })
          }
