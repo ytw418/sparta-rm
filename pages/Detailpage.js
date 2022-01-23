@@ -29,7 +29,7 @@ export default function DetailPage({ navigation, route }) {
       //넘어온 데이터는 route.params에 들어 있습니다.
       const { idx } = route.params;
       firebase_db.ref('/tip/' + idx).once('value').then((snapshot) => {
-         console.log("디테일 페이지에서 데이터베이스 조회성공")
+         console.log("디테일 페이지에서 데이터베이스 조회성공");
          let tip = snapshot.val();
          setTip(tip)
       });
@@ -52,7 +52,7 @@ export default function DetailPage({ navigation, route }) {
 
       console.log("디바이스 유니크 아이디 : ",userUniqueId)
       firebase_db.ref('/like/' + userUniqueId + '/' + tip.idx).set(tip, function (error) {
-         console.log("에러 : ",error)
+         console.log("에러 : ", error)
          Alert.alert("찜 완료!")
       });
    }

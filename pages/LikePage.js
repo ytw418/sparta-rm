@@ -9,7 +9,7 @@ import * as Application from 'expo-application';
 const isIOS = Platform.OS === 'ios';
 import {firebase_db} from "../firebaseConfig"
 
-ㅙㅣㅑㅊ
+
 //MainPage로 부터 navigation 속성을 전달받아 Card 컴포넌트 안에서 사용
 export default function LikePage({ navigation, route }) {
 
@@ -42,8 +42,10 @@ export default function LikePage({ navigation, route }) {
             if(tip && tip.length > 0){
                setTip(tip)
                setReady(false)
+               console.log("likepage 데이터 조회 성공")
             }else {
-               console.log("likepage 데이터 없음")
+               console.log("likepage 데이터 조회 실패")
+               
             }
       })
    }
