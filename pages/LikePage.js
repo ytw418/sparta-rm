@@ -10,7 +10,7 @@ const isIOS = Platform.OS === 'ios';
 import {firebase_db} from "../firebaseConfig"
 
 
-//MainPage로 부터 navigation 속성을 전달받아 Card 컴포넌트 안에서 사용
+//MainPage로 부터 navigation 속성을 전달받아 Card 컴포넌트 안에서 
 export default function LikePage({ navigation, route }) {
 
    const [tip, setTip] = useState([])
